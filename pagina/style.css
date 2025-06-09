@@ -1,0 +1,2385 @@
+/* ¡Hola! Aquí están todas las variables que uso en el sitio. Las he organizado por colores y tamaños para que sea más fácil mantener el diseño consistente */
+:root {
+    --primary-color: #081408;
+    --secondary-color: #001f0f;
+    --accent-color: #00ff88;
+    --text-color: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --neon-blue: #00f3ff;
+    --neon-purple: #9d00ff;
+    --neon-green: #39ff14;
+    --cyber-yellow: #ffd700;
+    --gradient-primary: linear-gradient(135deg, var(--neon-green), var(--accent-color));
+    --gradient-secondary: linear-gradient(135deg, #001a0d, #0a1a0a);
+    --gradient-neon: linear-gradient(135deg, var(--neon-purple), var(--neon-green));
+    --shadow-sm: 0 2px 4px rgba(57, 255, 20, 0.2);
+    --shadow-md: 0 4px 8px rgba(57, 255, 20, 0.3);
+    --shadow-lg: 0 8px 16px rgba(57, 255, 20, 0.4);
+    --border-color: rgba(57, 255, 20, 0.15);
+    --card-bg: rgba(0, 26, 13, 0.75);
+    --button-glow: 0 0 10px var(--neon-green),
+                  0 0 20px var(--neon-green),
+                  0 0 30px var(--accent-color);
+    --sidebar-width: 250px;
+    --sidebar-width-mobile: 80px;
+    --max-width: 100%;
+    --content-max-width: 1400px;
+    --ad-width: 300px;
+    --content-padding: 2rem;
+    --section-padding: 4rem;
+    --section-margin: 3rem;
+    --button-height: 50px;
+    --button-radius: 25px;
+    --section-bg: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    --section-border: 1px solid rgba(255, 255, 255, 0.1);
+    --section-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    --card-hover-bg: rgba(40, 40, 40, 0.9);
+    --card-min-height: 450px;
+    --card-max-width: 350px;
+    --grid-gap: 3rem;
+    --sidebar-bg: linear-gradient(180deg, rgba(0, 22, 11, 0.97) 0%, rgba(8, 22, 8, 0.99) 100%);
+    --shadow-glow-sm: 0 0 8px rgba(57, 255, 20, 0.25);
+    --shadow-glow-md: 0 0 15px rgba(57, 255, 20, 0.35);
+    --shadow-glow-lg: 0 0 25px rgba(57, 255, 20, 0.45);
+    --transition-smooth: all 0.3s ease;
+    --mobile-image-height: 200px;
+    --mobile-menu-height: 60px;
+    --mobile-padding: 1rem;
+}
+
+/* Estas animaciones las uso para darle vida al sitio. La de fadeIn es mi favorita, hace que los elementos aparezcan suavemente */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Este es el reset básico que uso para asegurarme de que todo se vea igual en todos los navegadores */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: var(--transition-smooth);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* La barra de scroll personalizada es uno de mis toques favoritos. Le da un aspecto más moderno al sitio */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 26, 13, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--neon-green);
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+    box-shadow: var(--shadow-glow-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-color);
+}
+
+/* El menú lateral es el corazón de la navegación. Lo he diseñado para que sea fácil de usar y se vea bien en todos los dispositivos */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: var(--sidebar-width);
+    background: var(--sidebar-bg);
+    padding: 2rem 1.5rem;
+    z-index: 1000;
+    transform: translateX(0);
+    transition: transform 0.3s ease, width 0.3s ease;
+    border-right: 1px solid var(--border-color);
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    overflow-y: auto;
+}
+
+/* Overlay para sidebar en móvil */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    transition: opacity 0.2s;
+}
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Sidebar responsive */
+@media (max-width: 900px) {
+    .sidebar {
+        position: fixed;
+        z-index: 1002;
+        left: -260px;
+        top: 0;
+        width: 250px;
+        height: 100vh;
+        background: #222;
+        transition: left 0.3s;
+        overflow-y: auto;
+    }
+    .container.sidebar-collapsed .sidebar {
+        left: 0;
+    }
+    .sidebar-overlay {
+        display: none;
+    }
+    .container.sidebar-collapsed ~ .sidebar-overlay,
+    .sidebar-overlay.active {
+        display: block;
+    }
+    .main-content {
+        margin-left: 0 !important;
+    }
+}
+
+/* En escritorio, el overlay nunca se muestra */
+@media (min-width: 901px) {
+    .sidebar-overlay {
+        display: none !important;
+    }
+}
+
+/* Botón sidebar más grande y táctil */
+.sidebar-toggle {
+    z-index: 1100;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 48px;
+    height: 48px;
+    font-size: 2rem;
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+}
+
+/* Estilos del sidebar scrollbar (Webkit) */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: rgba(0, 26, 13, 0.5);
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--neon-green);
+    border-radius: 3px;
+    border: 1px solid rgba(57, 255, 20, 0.3);
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+    box-shadow: 0 0 15px var(--neon-green);
+}
+
+/* Botón de toggle */
+.sidebar-toggle {
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 1001;
+    background: rgba(0, 26, 13, 0.9);
+    border: 2px solid var(--neon-green);
+    color: var(--neon-green);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+.sidebar-toggle:hover {
+    background: var(--neon-green);
+    color: var(--secondary-color);
+    transform: rotate(180deg);
+    box-shadow: 0 0 20px var(--neon-green);
+}
+
+.sidebar-toggle i {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+/* Estado del contenedor cuando el sidebar está colapsado */
+.container.sidebar-collapsed .sidebar {
+    transform: translateX(-100%);
+}
+
+.container.sidebar-collapsed .main-content {
+    margin-left: 0;
+}
+
+/* Contenido Principal */
+.main-content {
+    margin-left: var(--sidebar-width);
+    transition: margin-left 0.3s ease;
+    padding: 2rem;
+}
+
+/* Filtros y botones responsivos */
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1em;
+}
+.filtro-btn {
+    padding: 0.7em 1.2em;
+    font-size: 1rem;
+    border-radius: 2em;
+    border: none;
+    background: #eee;
+    color: #222;
+    cursor: pointer;
+    transition: background 0.2s;
+    touch-action: manipulation;
+}
+.filtro-btn.active,
+.filtro-btn:focus {
+    background: #222;
+    color: #fff;
+    outline: none;
+}
+
+/* Tarjetas de juegos responsivas */
+.juegos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1em;
+}
+.juego-card {
+    min-width: 0;
+    max-width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 253, 0.07);
+    transition: box-shadow 0.2s;
+    touch-action: manipulation;
+}
+.juego-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Detalles del juego en móvil */
+@media (max-width: 700px) {
+    .detalles-container {
+        width: 98vw;
+        max-width: 98vw;
+        min-width: 0;
+        padding: 0.5em;
+        font-size: 1rem;
+    }
+    .detalles-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .detalles-imagen img {
+        width: 100%;
+        max-width: 100vw;
+        height: auto;
+    }
+    .detalles-info h2 {
+        font-size: 1.2em;
+    }
+    .detalles-meta {
+        flex-direction: column;
+        gap: 0.5em;
+    }
+    .detalles-video iframe {
+        width: 100%;
+        min-height: 180px;
+        max-width: 100vw;
+    }
+}
+
+/* Mejoras generales para móvil */
+@media (max-width: 600px) {
+    .header-central,
+    .logo-grande,
+    .text-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .footer-content {
+        flex-direction: column;
+        gap: 1em;
+    }
+    .acerca-container {
+        padding: 0.5em;
+    }
+    .acerca-imagenes {
+        flex-direction: column;
+        gap: 0.5em;
+    }
+}
+
+/* Anuncios */
+.ads {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    width: var(--ad-width, 300px);
+    max-height: calc(100vh - 4rem);
+    background: rgba(0, 26, 13, 0.85);
+    padding: 1.5rem;
+    z-index: 999;
+    overflow-y: auto;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.1);
+}
+
+.ad-space {
+    position: relative;
+    margin-bottom: 2rem;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1.5rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border: 1px solid rgba(57, 255, 20, 0.1);
+}
+
+.ad-space:last-child {
+    margin-bottom: 0;
+}
+
+.ad-space::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    opacity: 0.5;
+}
+
+.ad-space h3 {
+    color: var(--neon-green);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+}
+
+.ad-content {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid rgba(57, 255, 20, 0.05);
+    transition: all 0.3s ease;
+}
+
+.ad-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* Botón de cerrar anuncio */
+.ad-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid var(--neon-green);
+    color: var(--neon-green);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    font-size: 1rem;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+}
+
+.ad-close:hover {
+    background: var(--neon-green);
+    color: var(--secondary-color);
+    transform: rotate(180deg) scale(1.1);
+    box-shadow: 0 0 15px var(--neon-green);
+    border-color: transparent;
+}
+
+.ad-close:active {
+    transform: rotate(180deg) scale(0.95);
+}
+
+.ad-close::before {
+    content: '×';
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* Animaciones */
+.ads.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%);
+    pointer-events: none;
+    display: none;
+}
+
+.ad-space.hidden {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    transform: scale(0.95);
+    display: none;
+}
+
+/* Scrollbar personalizada para los anuncios */
+.ads::-webkit-scrollbar {
+    width: 4px;
+}
+
+.ads::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+}
+
+.ads::-webkit-scrollbar-thumb {
+    background: var(--neon-green);
+    border-radius: 2px;
+}
+
+/* Media Queries para anuncios */
+@media (max-width: 1400px) {
+    .ads {
+        width: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .ads {
+        width: 250px;
+        right: 1rem;
+        top: 1rem;
+    }
+
+    .ad-space {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ads {
+        width: calc(100% - 2rem);
+        left: 1rem;
+        right: 1rem;
+        max-height: calc(100vh - 2rem);
+    }
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 1rem;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    background: transparent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    overflow: hidden;
+}
+
+.logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(1) drop-shadow(0 0 10px rgba(57, 255, 20, 0.5));
+}
+
+.logo i {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.logo-container h1 {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    margin: 1rem 0 0.5rem;
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.slogan {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Menú Principal */
+.main-nav {
+    margin-top: 2rem;
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.main-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+.menu-link i {
+    width: 30px;
+    font-size: 1.2rem;
+    color: var(--neon-green);
+}
+
+.menu-link span {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.menu-link:hover {
+    background: rgba(57, 255, 20, 0.1);
+    color: var(--text-color);
+    transform: translateX(5px);
+    border-color: var(--border-color);
+}
+
+.menu-link:hover i {
+    color: var(--accent-color);
+}
+
+.menu-link:hover span {
+    color: var(--text-color);
+}
+
+/* Sección de Juegos Destacados */
+.juegos-destacados {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.juegos-populares-de-la-comunidad h3 {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.juegos-destacados h2 {
+    text-align: center;
+    display: block;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    color: var(--neon-green);
+    text-shadow: var(--shadow-glow-sm);
+}
+
+.juegos-destacados {
+    text-align: center;
+    display: block;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    color: var(--neon-green);
+    text-shadow: var(--shadow-glow-sm);
+}
+
+/* Contenedor de filtros */
+.filtros {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+.filtro-btn {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: none;
+    margin: 0.3rem;
+}
+
+.filtro-btn:hover {
+    background: rgba(57, 255, 20, 0.1);
+    color: var(--text-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-sm);
+    border-color: var(--neon-green);
+}
+
+.filtro-btn.active {
+    background: var(--neon-green);
+    color: var(--primary-color);
+    border-color: var(--neon-green);
+    box-shadow: var(--shadow-glow-md);
+}
+
+/* Grid de Juegos */
+.juegos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: var(--content-max-width);
+}
+
+.juego-card {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    height: 380px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 10px rgba(3, 167, 28, 0.838);
+    opacity: 1;
+    transform: translateY(0);
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.juego-link {
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.juego-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    image-rendering: -webkit-optimize-contrast;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.juego-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 15px rgba(62, 234, 10, 0.872), var(--shadow-glow-md);
+    border-color: var(--neon-green);
+}
+
+.juego-card:hover img {
+    transform: scale(1.05);
+}
+
+.categoria-tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.945);
+    color: var(--neon-green);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--neon-green);
+    backdrop-filter: blur(4px);
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.plataforma-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(0, 0, 0, 0.9);
+    color: var(--neon-blue);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--neon-blue);
+    backdrop-filter: blur(4px);
+    z-index: 5;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.plataforma-tag:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
+    border-width: 2px;
+}
+
+.plataforma-tag:active {
+    transform: scale(0.95);
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.plataforma-tag::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 25px;
+    background: transparent;
+    border: 2px solid transparent;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.plataforma-tag:hover::after {
+    opacity: 0.5;
+    border-color: currentColor;
+}
+
+.plataforma-tag.pc {
+    color: var(--neon-green);
+    border-color: var(--neon-green);
+}
+
+.plataforma-tag.pc:hover {
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.6);
+}
+
+.plataforma-tag.playstation {
+    color: #2E6DB4;
+    border-color: #2E6DB4;
+}
+
+.plataforma-tag.playstation:hover {
+    box-shadow: 0 0 15px rgba(46, 109, 180, 0.6);
+}
+
+.plataforma-tag.xbox {
+    color: #107C10;
+    border-color: #107C10;
+}
+
+.plataforma-tag.xbox:hover {
+    box-shadow: 0 0 15px rgba(16, 124, 16, 0.6);
+}
+
+.plataforma-tag.nintendo {
+    color: #E60012;
+    border-color: #E60012;
+}
+
+.plataforma-tag.nintendo:hover {
+    box-shadow: 0 0 15px rgba(230, 0, 18, 0.6);
+}
+
+.plataforma-tag.mobile {
+    color: #FF9900;
+    border-color: #FF9900;
+}
+
+.plataforma-tag.mobile:hover {
+    box-shadow: 0 0 15px rgba(255, 153, 0, 0.6);
+}
+
+/* Posicionamiento escalonado de las etiquetas de plataforma */
+.juego-card .plataforma-tag:nth-of-type(2) {
+    top: 3.5rem;
+}
+
+.juego-card .plataforma-tag:nth-of-type(3) {
+    top: 6rem;
+}
+
+.juego-card .plataforma-tag:nth-of-type(4) {
+    top: 8.5rem;
+}
+
+.juego-card .plataforma-tag:nth-of-type(5) {
+    top: 11rem;
+}
+
+/* Media queries para etiquetas de plataforma en dispositivos móviles */
+@media screen and (max-width: 768px) {
+    .plataforma-tag {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+    }
+    
+    .juego-card .plataforma-tag:nth-of-type(2) {
+        top: 3rem;
+    }
+    
+    .juego-card .plataforma-tag:nth-of-type(3) {
+        top: 5rem;
+    }
+    
+    .juego-card .plataforma-tag:nth-of-type(4) {
+        top: 7rem;
+    }
+    
+    .juego-card .plataforma-tag:nth-of-type(5) {
+        top: 9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .plataforma-tag {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.6rem;
+    }
+    
+    .juego-card .plataforma-tag:nth-of-type(2) {
+        top: 2.5rem;
+    }
+    
+    .juego-card .plataforma-tag:nth-of-type(3) {
+        top: 4rem;
+    }
+    
+    .juego-card .plataforma-tag:nth-of-type(4) {
+        top: 5.5rem;
+    }
+    
+    .juego-card .plataforma-tag:nth-of-type(5) {
+        top: 7rem;
+    }
+}
+
+.juego-card:hover .categoria-tag {
+    background: var(--neon-green);
+    color: var(--secondary-color);
+}
+
+.juego-card:hover .plataforma-tag {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+}
+
+.juego-card:hover .plataforma-tag.pc {
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+}
+
+.juego-card:hover .plataforma-tag.playstation {
+    box-shadow: 0 0 10px rgba(46, 109, 180, 0.4);
+}
+
+.juego-card:hover .plataforma-tag.xbox {
+    box-shadow: 0 0 10px rgba(16, 124, 16, 0.4);
+}
+
+.juego-card:hover .plataforma-tag.nintendo {
+    box-shadow: 0 0 10px rgba(230, 0, 18, 0.4);
+}
+
+.juego-card:hover .plataforma-tag.mobile {
+    box-shadow: 0 0 10px rgba(255, 153, 0, 0.4);
+}
+
+.juego-card h3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(0, 26, 13, 0.95), transparent);
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+/* Efectos de Scroll */
+.scroll-controls {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    gap: 1rem;
+    z-index: 100;
+}
+
+.scroll-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: var(--neon-green);
+    border: 2px solid var(--neon-green);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-btn::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--secondary-color);
+    color: var(--neon-green);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    border: 1px solid var(--neon-green);
+}
+
+.scroll-btn:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px var(--neon-green);
+    background: var(--neon-green);
+    color: var(--secondary-color);
+}
+
+.scroll-btn:active {
+    transform: scale(0.95);
+}
+
+.scroll-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Posicionamiento específico para los botones de scroll */
+.scroll-left {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.scroll-right {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Media queries para los botones de scroll */
+@media (max-width: 768px) {
+    .scroll-btn {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-btn {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* Efectos de Hover */
+.hover-effect {
+    transition: all var(--transition-smooth);
+}
+
+.hover-effect:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Efectos de Fade */
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Efectos de Pulse */
+.pulse-effect {
+    animation: pulse 2s infinite;
+}
+
+/* Mejoras de Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* El modo oscuro es una característica que muchos usuarios pidieron. Me tomó tiempo implementarlo correctamente */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #0a0a0a;
+        --secondary-color: #1a1a1a;
+        --text-color: #ffffff;
+        --text-secondary: #b3b3b3;
+    }
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(180deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    padding: 4rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--neon-green);
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    opacity: 0.5;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.mapa-sitio h3, .redes-sociales h3 {
+    color: var(--neon-green);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+}
+
+.mapa-sitio h3::after, .redes-sociales h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--gradient-primary);
+}
+
+.mapa-sitio ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.mapa-sitio a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: rgba(57, 255, 20, 0.05);
+    border: 1px solid transparent;
+}
+
+.mapa-sitio a:hover {
+    color: var(--neon-green);
+    background: rgba(57, 255, 20, 0.1);
+    border-color: var(--neon-green);
+    transform: translateX(10px);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
+}
+
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.social-icons a {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(57, 255, 20, 0.05);
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-icons a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.social-icons a:hover {
+    color: var(--secondary-color);
+    border-color: var(--neon-green);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2);
+}
+
+.social-icons a:hover::before {
+    opacity: 1;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(57, 255, 20, 0.1);
+    position: relative;
+}
+
+.footer-bottom p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Media Queries consolidados */
+@media screen and (max-width: 1400px) {
+    :root {
+        --sidebar-width: 200px;
+    }
+    .main-content {
+        margin-left: var(--sidebar-width);
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    :root {
+        --sidebar-width: 180px;
+        --card-max-width: 250px;
+    }
+    .main-content {
+        margin-left: var(--sidebar-width);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .juego-card {
+        height: auto;
+        min-height: 280px;
+        margin: 0.5rem;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(8, 223, 83, 0.2);
+    }
+
+    .juego-card img {
+        height: 180px;
+        object-fit: cover;
+        width: 100%;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .juego-card h3 {
+        font-size: 1.1rem;
+        padding: 1rem;
+        background: linear-gradient(to top, rgba(0, 26, 13, 0.95), transparent);
+        margin: 0;
+        position: relative;
+        bottom: 0;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: 60px;
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        left: 0;
+        right: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background: var(--sidebar-bg);
+        border-top: 1px solid var(--border-color);
+        z-index: 1000;
+    }
+
+    .sidebar .logo-container {
+        display: none;
+    }
+
+    .main-nav {
+        width: 100%;
+        margin: 0;
+    }
+
+    .main-nav ul {
+        display: flex;
+        justify-content: space-around;
+        padding: 0;
+    }
+
+    .main-nav li {
+        margin: 0;
+    }
+
+    .menu-link {
+        flex-direction: column;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .menu-link i {
+        margin-bottom: 0.2rem;
+        font-size: 1.2rem;
+    }
+
+    .menu-link span {
+        display: none;
+    }
+
+    .submenu {
+        position: fixed;
+        bottom: 60px;
+        left: 0;
+        right: 0;
+        background: var(--sidebar-bg);
+        border-top: 1px solid var(--border-color);
+        padding: 1rem;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+
+    .submenu-link {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .container {
+        padding-bottom: 60px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .juego-card {
+        min-height: 240px;
+        margin: 0.3rem;
+    }
+
+    .juego-card img {
+        height: 160px;
+    }
+
+    .juego-card h3 {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+
+    .sidebar {
+        height: 50px;
+    }
+
+    .menu-link {
+        padding: 0.4rem;
+    }
+
+    .menu-link i {
+        font-size: 1.1rem;
+    }
+
+    .submenu {
+        bottom: 50px;
+    }
+
+    .container {
+        padding-bottom: 50px;
+    }
+}
+
+/* Ajustes para la orientación landscape en móviles */
+@media screen and (max-height: 480px) and (orientation: landscape) {
+    .sidebar {
+        height: auto;
+        padding: 0.5rem;
+    }
+
+    .main-nav ul {
+        flex-wrap: wrap;
+    }
+
+    .menu-link {
+        padding: 0.3rem;
+    }
+
+    .juego-card {
+        min-height: 200px;
+    }
+
+    .juego-card img {
+        height: 140px;
+    }
+}
+
+/* Los efectos táctiles los añadí para mejorar la experiencia en dispositivos móviles. Es importante que los usuarios sientan que sus acciones tienen respuesta */
+@media (hover: none) {
+    .menu-link:active,
+    .submenu-link:active {
+        background: rgba(57, 255, 20, 0.2);
+        transform: scale(0.95);
+    }
+
+    .juego-card:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Soporte para movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Soporte para pantallas de alta densidad (retina) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .juego-card img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Soporte para navegadores antiguos */
+@supports not (display: grid) {
+    .footer-content,
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+/* Grid para Características y Video */
+.caracteristicas-video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+    align-items: start;
+}
+.detalles-caracteristicas h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .caracteristicas-video-grid {
+        grid-template-columns: 1fr;
+    }
+    .detalles-video {
+        margin-top: 2rem;
+    }
+}
+
+/* Botón de cerrar todos los anuncios */
+.close-all-ads {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    background: rgba(0, 26, 13, 0.9);
+    border: 1px solid var(--neon-green);
+    color: var(--neon-green);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    font-size: 0.8rem;
+}
+
+.close-all-ads:hover {
+    background: var(--neon-green);
+    color: var(--secondary-color);
+    transform: rotate(90deg);
+    box-shadow: 0 0 15px var(--neon-green);
+}
+
+.close-all-ads i {
+    font-size: 0.8rem;
+    line-height: 1;
+}
+
+/* Header Central Mejorado */
+.header-central {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3rem 2rem;
+    margin-bottom: 4rem;
+    background: linear-gradient(135deg, rgba(0, 26, 13, 0.5) 0%, rgba(22, 16, 8, 0.7) 100%);
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-glow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Opcional: Línea sutil arriba */
+.header-central::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+    opacity: 0.5;
+}
+
+/* Logo Grande */
+.logo-grande {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: rgba(0, 26, 13, 0.8);
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+    cursor: pointer;
+}
+
+.logo-grande a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.logo-grande img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(1) drop-shadow(0 0 15px rgba(57, 255, 20, 0.6));
+    transition: transform 0.3s ease;
+}
+
+.logo-grande:hover img {
+    transform: scale(1.1);
+}
+
+.header-central .text-content {
+    text-align: left;
+}
+
+.header-central h1 {
+    font-size: 2.8rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+}
+
+.header-central .slogan {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+/* Estilos para la sección de plataformas */
+/* Eliminados los estilos de plataformas */
+
+/* Estilos para el menú desplegable */
+.menu-item-dropdown {
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+.dropdown-toggle i {
+    width: 30px;
+    font-size: 1.2rem;
+    color: var(--neon-green);
+}
+
+.dropdown-toggle span {
+    flex: 1;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.dropdown-icon {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+    color: var(--neon-green);
+}
+
+.menu-item-dropdown.active .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.submenu {
+    display: none;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    background: rgba(0, 26, 13, 0.95);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.menu-item-dropdown.active .submenu {
+    display: block;
+}
+
+.submenu-link {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+}
+
+.submenu-link i {
+    width: 25px;
+    font-size: 1rem;
+    color: var(--neon-green);
+    margin-right: 0.5rem;
+}
+
+.submenu-link:hover {
+    background: rgba(57, 255, 20, 0.1);
+    color: var(--text-color);
+    border-left-color: var(--neon-green);
+    padding-left: 1.5rem;
+}
+
+.submenu-link:hover i {
+    color: var(--accent-color);
+}
+
+/* Media Queries para el menú lateral */
+@media screen and (max-width: 768px) {
+    .menu-item-dropdown {
+        margin-bottom: 0.3rem;
+    }
+
+    .dropdown-toggle {
+        padding: 0.6rem 0.8rem;
+    }
+
+    .submenu {
+        padding: 0.3rem 0;
+    }
+
+    .submenu-link {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .dropdown-toggle {
+        padding: 0.5rem 0.6rem;
+    }
+
+    .dropdown-toggle i {
+        font-size: 1rem;
+    }
+
+    .dropdown-toggle span {
+        font-size: 0.9rem;
+    }
+
+    .submenu-link {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Estilos para la sección Acerca de Nosotros */
+.acerca-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(10, 26, 10, 0.95) 0%, rgba(0, 15, 7, 0.98) 100%);
+    z-index: 1500;
+    overflow-y: auto;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+.acerca-section.active {
+    display: block;
+    opacity: 1;
+}
+
+.acerca-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    position: relative;
+}
+
+.acerca-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 3rem;
+    position: relative;
+    border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+    padding-bottom: 2rem;
+}
+
+.acerca-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    background: rgba(0, 26, 13, 0.5);
+    border: 2px solid var(--neon-green);
+    border-radius: 15px;
+    margin-right: 2rem;
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
+}
+
+.acerca-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+.acerca-logo-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.acerca-slogan {
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.acerca-title {
+    font-size: 2.5rem;
+    color: var(--neon-green);
+    text-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+    flex-grow: 1;
+}
+
+.acerca-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--neon-green);
+    border: 2px solid var(--neon-green);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.acerca-close:hover {
+    background: var(--neon-green);
+    color: var(--secondary-color);
+    transform: rotate(90deg);
+    box-shadow: 0 0 15px var(--neon-green);
+}
+
+.acerca-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.acerca-valores, .acerca-descripcion {
+    background: rgba(0, 26, 13, 0.7);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(57, 255, 20, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.acerca-valores h3, .acerca-descripcion h3 {
+    color: var(--neon-green);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+}
+
+.acerca-valores h3::after, .acerca-descripcion h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--gradient-primary);
+}
+
+.acerca-valores ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.acerca-valores li {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    position: relative;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.acerca-valores li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--neon-green);
+    font-size: 1.5rem;
+}
+
+.acerca-descripcion p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.acerca-imagenes {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.acerca-img {
+    max-width: 180px;
+    height: 180px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(57, 255, 20, 0.3));
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+    background: rgba(0, 26, 13, 0.5);
+    padding: 15px;
+    border: 1px solid rgba(57, 255, 20, 0.2);
+}
+
+.acerca-img:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+@media (max-width: 768px) {
+    .acerca-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .acerca-logo-container {
+        margin-right: 0;
+        margin-bottom: 2rem;
+    }
+    
+    .acerca-title {
+        margin-bottom: 2rem;
+    }
+    
+    .acerca-close {
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    .acerca-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .acerca-container {
+        padding: 2rem 1rem;
+    }
+    
+    .acerca-valores, .acerca-descripcion {
+        padding: 1.5rem;
+    }
+    
+    .acerca-title {
+        font-size: 2rem;
+    }
+}
+
+/* Estilos para la sección de detalles del juego */
+.juego-detalles {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(60, 132, 5, 0.445);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.detalles-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    background: #08d0d7ef;
+    border-radius: 10px;
+    padding: 2rem;
+    position: relative;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-glow-lg);
+}
+
+.detalles-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid var(--border-color);
+    color: var(--neon-green);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    line-height: 38px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-glow-sm);
+    padding: 0;
+}
+
+.detalles-close:hover {
+    background: var(--neon-green);
+    color: var(--primary-color);
+    transform: rotate(90deg) scale(1.1);
+    border-color: var(--neon-green);
+    box-shadow: var(--shadow-glow-md);
+}
+
+.detalles-header {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.detalles-imagen {
+    flex: 0 0 300px;
+}
+
+.detalles-imagen img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.detalles-info {
+    flex: 1;
+}
+
+.detalles-info h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.detalles-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.detalles-categoria {
+    background-color: var(--neon-green);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.detalles-plataformas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.detalles-plataformas .plataforma {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.detalles-plataformas .plataforma:hover {
+    background-color: rgba(61, 8, 8, 0.073);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-sm);
+}
+
+.detalles-content {
+    color: #fff;
+}
+
+.detalles-descripcion {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.detalles-caracteristicas {
+    margin-bottom: 2rem;
+}
+
+.detalles-caracteristicas h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.detalles-caracteristicas ul {
+    list-style: none;
+    padding: 0;
+}
+
+.detalles-caracteristicas li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.detalles-caracteristicas li::before {
+    content: '✓';
+    color: var(--neon-green);
+    margin-right: 0.8rem;
+    font-weight: bold;
+}
+
+.detalles-enlaces h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.enlaces-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.enlaces-grid a {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.enlaces-grid a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.enlaces-grid a:hover::before {
+    opacity: 0.1;
+}
+
+.enlaces-grid a i {
+    margin-right: 8px;
+    font-size: 1.2em;
+    display: inline-block;
+    width: 1em;
+    text-align: center;
+    color: #c9ff05;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px rgba(201, 255, 5, 0.3);
+}
+
+.enlaces-grid a:hover i {
+    color: #c9ff05;
+    text-shadow: 0 0 8px rgba(201, 255, 5, 0.5);
+    transform: scale(1.1);
+}
+
+.enlaces-grid a span {
+    z-index: 1;
+}
+
+.enlaces-grid a:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-sm);
+    border-color: var(--neon-green);
+}
+
+.enlaces-grid a:hover i {
+    color: var(--accent-color);
+}
+
+/* Iconos específicos para cada plataforma */
+.enlaces-grid a[data-icon="steam"] i::before {
+    content: '\f1b6';
+    font-family: 'Font Awesome 6 Brands';
+    font-weight: 400;
+    position: relative;
+    top: 1px;
+}
+
+.enlaces-grid a[data-icon="epic"] i::before {
+    content: '\f42e';
+    font-family: 'Font Awesome 6 Brands';
+    font-weight: 400;
+    position: relative;
+    top: 1px;
+}
+
+.enlaces-grid a[data-icon="playstation"] i::before {
+    content: '\f3df';
+    font-family: 'Font Awesome 6 Brands';
+    font-weight: 400;
+    position: relative;
+    top: 1px;
+}
+
+.enlaces-grid a[data-icon="xbox"] i::before {
+    content: '\f412';
+    font-family: 'Font Awesome 6 Brands';
+    font-weight: 400;
+    position: relative;
+    top: 1px;
+}
+
+.enlaces-grid a[data-icon="nintendo"] i::before {
+    content: 'NS';
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 0.75em;
+    position: relative;
+    top: 1px;
+    letter-spacing: -0.5px;
+    color: #c9ff05;
+    text-shadow: 0 0 5px rgba(201, 255, 5, 0.3);
+    display: inline-block;
+    width: 1.75em;
+    text-align: center;
+}
+
+.enlaces-grid a[data-icon="nintendo"]:hover i::before {
+    text-shadow: 0 0 8px rgba(201, 255, 5, 0.5);
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+.enlaces-grid a[data-icon="apple"] i::before {
+    content: '\f179';
+    font-family: 'Font Awesome 6 Brands';
+    font-weight: 400;
+    position: relative;
+    top: 1px;
+}
+
+.enlaces-grid a[data-icon="android"] i::before {
+    content: '\f17b';
+    font-family: 'Font Awesome 6 Brands';
+    font-weight: 400;
+    position: relative;
+    top: 1px;
+}
+
+.enlaces-grid a[data-icon="web"] i::before {
+    content: '\f0ac';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: relative;
+    top: 1px;
+}
+
+.enlaces-grid a[data-icon="youtube"] i::before {
+    content: '\f167';
+    font-family: 'Font Awesome 6 Brands';
+    font-weight: 400;
+    position: relative;
+    top: 1px;
+}
+
+.enlaces-grid a[data-icon="gog"] i::before {
+    content: 'GOG';
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 0.75em;
+    position: relative;
+    top: 1px;
+    letter-spacing: -0.5px;
+    color: #c9ff05;
+    text-shadow: 0 0 5px rgba(201, 255, 5, 0.3);
+    display: inline-block;
+    width: 1.75em;
+    text-align: center;
+}
+
+.enlaces-grid a[data-icon="gog"]:hover i::before {
+    text-shadow: 0 0 8px rgba(201, 255, 5, 0.5);
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+.enlaces-grid a[data-icon="ea"] i::before {
+    content: '\f1d1';
+    font-family: 'Font Awesome 6 Brands';
+    font-weight: 400;
+    position: relative;
+    top: 1px;
+}
+
+.enlaces-grid a[data-icon="amazon"] i::before {
+    content: '\f270';
+    font-family: 'Font Awesome 6 Brands';
+    font-weight: 400;
+    position: relative;
+    top: 1px;
+}
+
+.enlaces-grid a[data-icon="store"] i::before {
+    content: '\f54e';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: relative;
+    top: 1px;
+}
+
+/* Estilos para el contenedor del video dentro de los detalles */
+.detalles-video {
+    margin: 0;
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    background: #000;
+    border-radius: 8px;
+}
+
+.detalles-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Clase para ocultar elementos con transición */
+.hidden {
+    display: none;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+/* Transición de aparición para las tarjetas de juegos */
+.juego-card {
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}

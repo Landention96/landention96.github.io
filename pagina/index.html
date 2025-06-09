@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Aquí configuro todo lo que el navegador necesita saber antes de mostrar la página -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alpha Bits - Domina tu juego, forja tu leyenda</title>
+    <!-- Importo los estilos que he creado con tanto cariño -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Y los iconos de Font Awesome que tanto me gustan -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Un pequeño estilo temporal para el logo mientras lo diseño -->
+    <style>
+      .logo-temp {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: bold;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Overlay para cerrar el sidebar en móvil -->
+    <div class="sidebar-overlay"></div>
+    <!-- Este botón es mi favorito, permite ocultar/mostrar el menú lateral -->
+    <button
+      id="sidebarToggle"
+      class="sidebar-toggle"
+      aria-label="Abrir menú lateral"
+      tabindex="0"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="container">
+      <!-- El menú lateral es el corazón de la navegación. Lo diseñé para que sea intuitivo y accesible -->
+      <aside class="sidebar">
+        <!-- El logo y el título son lo primero que ven los usuarios -->
+        <div class="logo-container">
+          <div class="logo">
+            <a href="#" title="Ir al inicio">
+              <img
+                src="images/logo.png"
+                alt="Alpha Bits Logo"
+                class="logo-img"
+              />
+            </a>
+          </div>
+          <h1>Alpha Bits</h1>
+          <p class="slogan">Tu portal de videojuegos</p>
+        </div>
+
+        <!-- La navegación principal con todos los enlaces importantes -->
+        <nav class="main-nav">
+          <ul>
+            <!-- Cada sección del menú tiene su propio estilo y comportamiento -->
+            <li>
+              <a href="#acerca" class="menu-link">
+                <i class="fas fa-info-circle"></i>
+                <span>Acerca de Nosotros</span>
+              </a>
+            </li>
+            <!-- Los menús desplegables son geniales para organizar mucho contenido -->
+            <li class="menu-item-dropdown">
+              <a href="#comunidades" class="menu-link dropdown-toggle">
+                <i class="fas fa-users"></i>
+                <span>Comunidades</span>
+                <i class="fas fa-chevron-down dropdown-icon"></i>
+              </a>
+              <ul class="submenu">
+                <!-- Cada enlace de comunidad tiene su propio icono representativo -->
+                <li>
+                  <a
+                    href="https://www.3djuegos.com/comunidad/foro/2/0/pc/"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="fas fa-desktop"></i>
+                    <span>PC (3DJuegos)</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.laps4.com/foro/"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="fab fa-playstation"></i>
+                    <span>PlayStation (LaPS4)</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.somosxbox.com/foro/"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="fab fa-xbox"></i>
+                    <span>Xbox (SomosXbox)</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.nintenderos.com/foro/"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="fas fa-gamepad"></i>
+                    <span>Nintendo (Nintenderos)</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.androidpit.es/foro/android-juegos"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Mobile (AndroidPIT)</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://disboard.org/es/servers/tag/gaming"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="fab fa-discord"></i>
+                    <span>Discord</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item-dropdown">
+              <a href="#plataformas" class="menu-link dropdown-toggle">
+                <i class="fas fa-desktop"></i>
+                <span>Plataformas</span>
+                <i class="fas fa-chevron-down dropdown-icon"></i>
+              </a>
+              <ul class="submenu">
+                <li>
+                  <a href="#pc" class="submenu-link">
+                    <i class="fas fa-desktop"></i>
+                    <span>PC</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#playstation" class="submenu-link">
+                    <i class="fab fa-playstation"></i>
+                    <span>PlayStation</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#xbox" class="submenu-link">
+                    <i class="fab fa-xbox"></i>
+                    <span>Xbox</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#nintendo" class="submenu-link">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Nintendo Switch</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#mobile" class="submenu-link">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Mobile</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item-dropdown">
+              <a href="#rankings" class="menu-link dropdown-toggle">
+                <i class="fas fa-trophy"></i>
+                <span>Rankings</span>
+                <i class="fas fa-chevron-down dropdown-icon"></i>
+              </a>
+              <ul class="submenu">
+                <li>
+                  <a
+                    href="https://latam.ign.com/reviews"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="fas fa-star"></i>
+                    <span>IGN Latinoamérica</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.3djuegos.com/notas/"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="fas fa-chart-line"></i>
+                    <span>3DJuegos</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.levelup.com/reviews"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="fas fa-gamepad"></i>
+                    <span>LevelUp</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.twitch.tv/directory?language=es"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="fab fa-twitch"></i>
+                    <span>Twitch en Español</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item-dropdown">
+              <a href="#lanzamientos" class="menu-link dropdown-toggle">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Lanzamientos</span>
+                <i class="fas fa-chevron-down dropdown-icon"></i>
+              </a>
+              <ul class="submenu">
+                <li>
+                  <a
+                    href="https://latam.ign.com/upcoming"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="far fa-calendar-alt"></i>
+                    <span>IGN Latinoamérica</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.levelup.com/calendario"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="fas fa-fire"></i>
+                    <span>LevelUp</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.3djuegos.com/juegos-esperados/"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="far fa-clock"></i>
+                    <span>3DJuegos</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://store.steampowered.com/coming_soon/?l=spanish"
+                    target="_blank"
+                    class="submenu-link"
+                  >
+                    <i class="fab fa-steam"></i>
+                    <span>Steam</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- El contenido principal es donde ocurre la magia -->
+      <main class="main-content">
+        <!-- El encabezado central es lo primero que ven los usuarios -->
+        <header class="header-central">
+          <div class="logo-grande">
+            <a href="#" title="Ir al inicio">
+              <img src="images/logo.png" alt="Alpha Bits Logo" />
+            </a>
+          </div>
+          <div class="text-content">
+            <h1>Alpha Bits</h1>
+            <div class="slogan">Domina tu juego, forja tu leyenda</div>
+          </div>
+        </header>
+
+        <!-- La sección de juegos destacados es mi orgullo y alegría -->
+
+        <section class="juegos-destacados"& class="juegos-populares-de-la-comunidad">
+          <h3>juegos populares en la comunidad</h3>
+          <h2>Juegos Destacados</h2>
+          <!-- Los filtros permiten a los usuarios encontrar fácilmente lo que buscan -->
+          <div class="filtros">
+            <button class="filtro-btn active" data-categoria="todos">
+              TODOS
+            </button>
+            <button class="filtro-btn" data-categoria="rpg">RPG</button>
+            <button class="filtro-btn" data-categoria="aventura">
+              AVENTURA
+            </button>
+            <button class="filtro-btn" data-categoria="accion">ACCIÓN</button>
+            <button class="filtro-btn" data-categoria="deportes">
+              DEPORTES
+            </button>
+            <button class="filtro-btn" data-categoria="battle-royale">
+              BATTLE ROYALE
+            </button>
+            <button class="filtro-btn" data-categoria="sandbox">SANDBOX</button>
+          </div>
+          <!-- La cuadrícula de juegos muestra todo el contenido de manera organizada -->
+          <div class="juegos-grid">
+            <!-- Cada tarjeta de juego es una pequeña obra de arte -->
+            <div
+              class="juego-card"
+              data-categoria="rpg"
+              data-juego-id="baldurs-gate"
+            >
+              <a class="juego-link">
+                <img
+                  src="images/baldurs-gate-3-review_z2q4.jpg"
+                  alt="Baldur's Gate 3"
+                />
+                <div class="categoria-tag">RPG</div>
+                <h3>Baldur's Gate 3</h3>
+              </a>
+              <div class="plataforma-tag pc">PC</div>
+              <div class="plataforma-tag playstation">PS</div>
+            </div>
+            <div
+              class="juego-card"
+              data-categoria="aventura"
+              data-juego-id="zelda"
+            >
+              <a class="juego-link">
+                <img
+                  src="images/zelda.png"
+                  alt="The Legend of Zelda: Tears of the Kingdom"
+                />
+                <div class="categoria-tag">Aventura</div>
+                <h3>Zelda: Tears of the Kingdom</h3>
+              </a>
+              <div class="plataforma-tag nintendo">Switch</div>
+            </div>
+            <div
+              class="juego-card"
+              data-categoria="rpg"
+              data-juego-id="honkai-star-rail"
+            >
+              <a class="juego-link">
+                <img
+                  src="images/honkai-star-rail.jpg"
+                  alt="Honkai: Star Rail"
+                />
+                <div class="categoria-tag">RPG</div>
+                <h3>Honkai: Star Rail</h3>
+              </a>
+              <div class="plataforma-tag pc">PC</div>
+              <div class="plataforma-tag mobile">Mobile</div>
+              <div class="plataforma-tag playstation">PS</div>
+            </div>
+            <div
+              class="juego-card"
+              data-categoria="deportes"
+              data-juego-id="fc-24"
+            >
+              <a class="juego-link">
+                <img src="images/fc 25.jpg" alt="FC 24" />
+                <div class="categoria-tag">Deportes</div>
+                <h3>EA Sports FC 25</h3>
+              </a>
+              <div class="plataforma-tag pc">PC</div>
+              <div class="plataforma-tag playstation">PS</div>
+              <div class="plataforma-tag xbox">Xbox</div>
+              image.png
+              <div class="plataforma-tag nintendo">Switch</div>
+            </div>
+            <div
+              class="juego-card"
+              data-categoria="accion"
+              data-juego-id="zenless"
+            >
+              <a class="juego-link">
+                <img src="images/zenless.png" alt="Zenless Zone Zero" />
+                <div class="categoria-tag">Acción</div>
+                <h3>Zenless Zone Zero</h3>
+              </a>
+              <div class="plataforma-tag pc">PC</div>
+              <div class="plataforma-tag mobile">Mobile</div>
+              <div class="plataforma-tag playstation">PS</div>
+            </div>
+            <div
+              class="juego-card"
+              data-categoria="accion"
+              data-juego-id="marvel-rivals"
+            >
+              <a class="juego-link">
+                <img src="images/marvel rivals.png" alt="Marvel Rivals" />
+                <div class="categoria-tag">Acción</div>
+                <h3>Marvel Rivals</h3>
+              </a>
+              <div class="plataforma-tag pc">PC</div>
+              <div class="plataforma-tag playstation">PS</div>
+              <div class="plataforma-tag xbox">Xbox</div>
+            </div>
+            <div
+              class="juego-card"
+              data-categoria="accion"
+              data-juego-id="gta-v"
+            >
+              <a class="juego-link">
+                <img
+                  src="images/grand-theft-auto-v-gta-5-poster_1920x1080_xtrafondos.com.jpg"
+                  alt="Grand Theft Auto V"
+                />
+                <div class="categoria-tag">Acción</div>
+                <h3>Grand Theft Auto V</h3>
+              </a>
+              <div class="plataforma-tag pc">PC</div>
+              <div class="plataforma-tag playstation">PS</div>
+              <div class="plataforma-tag xbox">Xbox</div>
+            </div>
+            <div
+              class="juego-card"
+              data-categoria="battle-royale"
+              data-juego-id="fortnite"
+            >
+              <a class="juego-link">
+                <img src="images/fornite.png" alt="Fortnite" />
+                <div class="categoria-tag">Battle Royale</div>
+                <h3>Fortnite</h3>
+              </a>
+              <div class="plataforma-tag pc">PC</div>
+              <div class="plataforma-tag playstation">PS</div>
+              <div class="plataforma-tag xbox">Xbox</div>
+              <div class="plataforma-tag nintendo">Switch</div>
+              <div class="plataforma-tag mobile">Mobile</div>
+            </div>
+            <div
+              class="juego-card"
+              data-categoria="sandbox"
+              data-juego-id="minecraft"
+            >
+              <a class="juego-link">
+                <img src="images/minecraft.jpg" alt="Minecraft" />
+                <div class="categoria-tag">Sandbox</div>
+                <h3>Minecraft</h3>
+              </a>
+              <div class="plataforma-tag pc">PC</div>
+              <div class="plataforma-tag playstation">PS</div>
+              <div class="plataforma-tag xbox">Xbox</div>
+              <div class="plataforma-tag nintendo">Switch</div>
+              <div class="plataforma-tag mobile">Mobile</div>
+            </div>
+            <div
+              class="juego-card"
+              data-categoria="rpg"
+              data-juego-id="cyberpunk"
+            >
+              <a class="juego-link">
+                <img src="images/cyberpunk-2077.jpg" alt="Cyberpunk 2077" />
+                <div class="categoria-tag">RPG</div>
+                <h3>Cyberpunk 2077</h3>
+              </a>
+              <div class="plataforma-tag pc">PC</div>
+              <div class="plataforma-tag playstation">PS</div>
+              <div class="plataforma-tag xbox">Xbox</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- La sección de detalles del juego aparece cuando el usuario hace clic en una tarjeta -->
+        <section id="juego-detalles" class="juego-detalles">
+          <div class="detalles-container">
+            <button class="detalles-close">&times;</button>
+            <div class="detalles-header">
+              <div class="detalles-imagen">
+                <img src="" alt="" id="detalles-imagen" />
+              </div>
+              <div class="detalles-info">
+                <h2 id="detalles-titulo"></h2>
+                <div class="detalles-meta">
+                  <span
+                    class="detalles-categoria"
+                    id="detalles-categoria"
+                  ></span>
+                  <div
+                    class="detalles-plataformas"
+                    id="detalles-plataformas"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div class="detalles-content">
+              <div class="detalles-descripcion" id="detalles-descripcion"></div>
+              <div class="caracteristicas-video-grid">
+                <div class="detalles-caracteristicas">
+                  <h3>Características Principales</h3>
+                  <ul id="detalles-caracteristicas"></ul>
+                </div>
+                <div class="detalles-video">
+                  <!-- El iframe del video se insertará aquí -->
+                </div>
+              </div>
+              <div class="detalles-enlaces">
+                <h3>Enlaces Relacionados</h3>
+                <div class="enlaces-grid" id="detalles-enlaces"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Los anuncios son necesarios pero los he diseñado para que no molesten -->
+        <aside class="ads">
+          <div class="ad-space">
+            <button class="ad-close">×</button>
+            <h3>ESPACIO PUBLICITARIO</h3>
+            <div class="ad-content">
+              <img src="https://via.placeholder.com/300x250" alt="Anuncio" />
+            </div>
+          </div>
+          <div class="ad-space">
+            <button class="ad-close">×</button>
+            <h3>ESPACIO PUBLICITARIO</h3>
+            <div class="ad-content">
+              <img src="https://via.placeholder.com/300x250" alt="Anuncio" />
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <!-- La sección "Acerca de Nosotros" cuenta la historia de nuestro proyecto -->
+    <section id="acerca-section" class="acerca-section">
+      <div class="acerca-container">
+        <div class="acerca-header">
+          <div class="acerca-logo-container">
+            <img
+              src="images/logo.png"
+              alt="Alpha Bits Logo"
+              class="acerca-logo"
+            />
+            <h1>Alpha Bits</h1>
+            <p class="acerca-slogan">"Domina tu juego, forja tu leyenda"</p>
+          </div>
+          <h2 class="acerca-title">Acerca de Nosotros</h2>
+          <button class="acerca-close">&times;</button>
+        </div>
+
+        <div class="acerca-content">
+          <div class="acerca-valores">
+            <h3>Nuestros Valores:</h3>
+            <ul>
+              <li>Antes que todo, somos jugadores</li>
+              <li>Apostamos por nuestros juegos a largo plazo</li>
+              <li>Buscamos la excelencia en cada análisis</li>
+              <li>Valoramos la opinión sincera de nuestra comunidad</li>
+            </ul>
+          </div>
+
+          <div class="acerca-descripcion">
+            <h3>¿Quiénes Somos?</h3>
+            <p>
+              Alpha Bits se fundó en 2023 con el objetivo de analizar juegos y
+              presentar una reseña real de la experiencia de diversas
+              plataformas de juegos a nuestros jugadores.
+            </p>
+            <p>
+              Somos un equipo de apasionados por los videojuegos comprometidos
+              con ofrecer contenido de calidad, análisis honestos y guías
+              detalladas para que puedas tomar las mejores decisiones en tu
+              experiencia gaming.
+            </p>
+          </div>
+
+          <div class="acerca-imagenes">
+            <img
+              src="images/logo.png"
+              alt="Alpha Bits Logo"
+              class="acerca-img"
+            />
+            <img
+              src="images/fc 25.jpg"
+              alt="Control de juego"
+              class="acerca-img"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- El pie de página es el último detalle pero no menos importante -->
+    <footer>
+      <div class="footer-content">
+        <div class="mapa-sitio">
+          <h3>Mapa del Sitio</h3>
+          <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li>
+              <a
+                href="https://vandal.elespanol.com/noticias/videojuegos"
+                target="_blank"
+                >Noticias</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.hobbyconsolas.com/byconsolas "
+                target="_blank"
+                >Reseñas</a
+              >
+            </li>
+            <li>
+              <a href="https://www.eliteguias.com/" target="_blank">Guías</a>
+            </li>
+            <li>
+              <a href="https://comunidadgaming.es/" target="_blank"
+                >Comunidad</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="redes-sociales">
+          <h3>Síguenos</h3>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/share/12GH5hYZtcv/"
+              ><i class="fab fa-facebook"></i
+            ></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a
+              href="https://www.instagram.com/ahvgameryt?igsh=MWVqcmIyMm50N2hrMw=="
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="https://youtube.com/@arongamer4591?si=4w_k3LhWWYYw-M2m"
+              ><i class="fab fa-youtube"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Alpha Bits. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <!-- El JavaScript que hace que todo funcione mágicamente -->
+    <script src="script.js"></script>
+  </body>
+</html>
